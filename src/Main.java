@@ -11,6 +11,7 @@ public class Main {
         for(int i = 0; i < iloscKostek; i++){
             System.out.println("Kostka "+i+" "+tab[i]);
         }
+        System.out.println(obliczPunkty(tab));
 
     }
     public static int wprowadzIloscKostek(){
@@ -40,13 +41,21 @@ public class Main {
     }
     public static int obliczPunkty(int[] tab){
         int sum = 0;
+        boolean[] counted = new boolean[tab.length];
         for(int i = 0; i < tab.length; i++){
-            for(int j = 1; j < tab.length-1; j++){
-                if(tab[i] == tab[i]){
-                    sum += tab[i];
-                    break;
+            if(!counted[i]) {
+                int count = 0;
+                for (int j = 0; j < tab.length; j++) {
+                    if (tab[i] == tab[j]) {
+                        count++;
+                        counted[j] = true;
+                    }
+                }
+                if (count > 1) {
+                    sum += tab[i] * count;
                 }
             }
         }
+        return sum;
     }
 }
